@@ -13,7 +13,7 @@
 
 Вы можете использовать мой проект как основу своему будущему проекту, но внешний вид не должен соответствовать оригинальной странице: [https://protey.info](https://protey.info).
 
-**Демо:** [https://element1493.github.io/Page404_webGuestWorkers/](https://element1493.github.io/Page404_webGuestWorkers/)
+**Демо:** [https://element1493.github.io/Page404/](https://element1493.github.io/Page404/)
 
 ## Автор оригинальной страницы:
  - [https://protey.info](https://protey.info) [[@Protey4ik](https://t.me/Protey4ik)]
