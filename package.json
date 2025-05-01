@@ -29,7 +29,7 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "deploy" : "./node_modules/gh-pages/bin/gh-pages-clean.js && gh-pages -d build",
+    "deploy" : "gh-pages-clean && gh-pages -d dist",
     "lint": "eslint src",
     "svgToJson": "node svgToJson.mjs"
   },
