@@ -197,7 +197,7 @@ class C {
         const h = Math.round(this.audio.currentTime), l = Math.round(this.audio.duration);
         h == l && L < 3 ? (L++, this.content.setAttribute("data-index", String(L)), this.track(L)) : h == l && L >= 3 && (this.content.setAttribute("data-index", "0"), this.track(0));
       }, 10);
-      this.audio.pause(), clearInterval(M), this.content.setAttribute("data-ыplay", "false");
+      this.audio.pause(), clearInterval(M), this.content.setAttribute("data-play", "false");
     }
   }
   //События на переключение следующего трека:

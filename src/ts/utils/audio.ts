@@ -198,7 +198,7 @@ class Audio{
             }, 10);
             this.audio.pause();
             clearInterval(timerId);
-            this.content.setAttribute('data-ыplay','false');
+            this.content.setAttribute('data-play','false');
         }
     }
 //События на переключение следующего трека:

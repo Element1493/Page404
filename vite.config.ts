@@ -4,7 +4,6 @@ import autoprefixer from 'autoprefixer';
 import eslint from 'vite-plugin-eslint2';
 
 export default defineConfig({
-    base: "https://Element1493.github.io/Page404/",
     plugins: [
         eslint()
     ],
