@@ -1,0 +1,46 @@
+{
+  "name": "page404_webguestworkers",
+  "description": "",
+  "private": true,
+  "version": "1.0.0",
+  "keywords": [],
+  "author": {
+    "name": "Sergey Zverev",
+    "email": "element1493@yandex.ru"
+  },
+  "license": "MIT",
+  "type": "module",
+  "browserslist": [
+    "defaults"
+  ],
+  "files": [
+    "dist"
+  ],
+  "main": "./dist/script.umd.js",
+  "module": "./dist/script.es.js",
+  "exports": {
+    ".": {
+      "import": "./dist/script.es.js",
+      "require": "./dist/script.umd.js"
+    }
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "lint": "eslint src",
+    "svgToJson": "node svgToJson.mjs"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.25.1",
+    "@types/node": "^22.14.1",
+    "autoprefixer": "^10.4.21",
+    "eslint": "^9.25.1",
+    "globals": "^16.0.0",
+    "sass": "1.87.0",
+    "typescript": "5.8.3",
+    "typescript-eslint": "^8.31.0",
+    "vite": "^6.3.2",
+    "vite-plugin-eslint2": "^5.0.3"
+  }
+}
