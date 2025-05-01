@@ -111,7 +111,11 @@ class C {
             this.prev();
             break;
           case "switch":
+<<<<<<< HEAD
             this.toggle();
+=======
+            this.switch();
+>>>>>>> 5a64a2127298b3f02d583ce38bb23ce0dd31b56c
             break;
           case "next":
             this.next();
@@ -178,6 +182,7 @@ class C {
       this.controls.append(v);
     }, this.button("prev"), this.button("switch"), this.button("next");
   }
+<<<<<<< HEAD
   //События на переключение предыдущего трека:
   prev(L = Number(this.content.getAttribute("data-index"))) {
     this.content.setAttribute("data-play", "true"), L > 0 ? (L--, this.content.setAttribute("data-index", String(L)), this.track(L)) : (this.content.setAttribute("data-index", String(s.length - 1)), this.track(s.length - 1));
@@ -191,16 +196,33 @@ class C {
     this.audio.paused == !0 && this.track(L);
   }
   //Событие на остановку трека:
+=======
+  prev(L = Number(this.content.getAttribute("data-index"))) {
+    this.content.setAttribute("data-play", "true"), L > 0 ? (L--, this.content.setAttribute("data-index", String(L)), this.track(L)) : (this.content.setAttribute("data-index", String(s.length - 1)), this.track(s.length - 1));
+  }
+  switch() {
+    this.audio.paused == !1 ? this.pause() : this.play();
+  }
+  play(L = Number(this.content.getAttribute("data-index"))) {
+    this.audio.paused == !0 && this.track(L);
+  }
+>>>>>>> 5a64a2127298b3f02d583ce38bb23ce0dd31b56c
   pause(L = Number(this.content.getAttribute("data-index"))) {
     if (this.audio.paused == !1) {
       const M = setInterval(() => {
         const h = Math.round(this.audio.currentTime), l = Math.round(this.audio.duration);
         h == l && L < 3 ? (L++, this.content.setAttribute("data-index", String(L)), this.track(L)) : h == l && L >= 3 && (this.content.setAttribute("data-index", "0"), this.track(0));
       }, 10);
+<<<<<<< HEAD
       this.audio.pause(), clearInterval(M), this.content.setAttribute("data-ыplay", "false");
     }
   }
   //События на переключение следующего трека:
+=======
+      this.audio.pause(), clearInterval(M), this.content.setAttribute("data-play", "false");
+    }
+  }
+>>>>>>> 5a64a2127298b3f02d583ce38bb23ce0dd31b56c
   next(L = Number(this.content.getAttribute("data-index"))) {
     this.content.setAttribute("data-play", "true"), L < s.length - 1 ? (L++, this.content.setAttribute("data-index", String(L)), this.track(L)) : (this.content.setAttribute("data-index", "0"), this.track(0));
   }
@@ -624,8 +646,13 @@ const y = (t, L = 0, M = 726) => {
       for (let H = 0; H < f.length; H++)
         f[H].addEventListener("click", () => {
           switch (f[H].getAttribute("data-audio")) {
+<<<<<<< HEAD
             case "toggle":
               v.toggle();
+=======
+            case "switch":
+              v.switch();
+>>>>>>> 5a64a2127298b3f02d583ce38bb23ce0dd31b56c
               break;
             case "play":
               v.play();

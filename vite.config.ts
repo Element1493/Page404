@@ -4,7 +4,10 @@ import autoprefixer from 'autoprefixer';
 import eslint from 'vite-plugin-eslint2';
 
 export default defineConfig({
+<<<<<<< HEAD
     base: "https://Element1493.github.io/Page404_webGuestWorkers/",
+=======
+>>>>>>> 5a64a2127298b3f02d583ce38bb23ce0dd31b56c
     plugins: [
         eslint()
     ],
