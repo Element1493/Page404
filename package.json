@@ -24,7 +24,7 @@
       "require": "./dist/script.umd.js"
     }
   },
-  "homepage": "https://Element1493.github.io/Page404_webGuestWorkers/",
+  "homepage": "https://Element1493.github.io/Page404/",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
