@@ -143,7 +143,7 @@ class Audio{
                             tag:'path',
                             attributes:[{
                                 name:'fill',
-                                value:'currentcolor',
+                                value:'currentColor',
                             },{
                                 name:'d',
                                 value:'M0 0v7.5l5-3.8L0 0zm5 3.8v3.8l5-3.8L5 0v3.8z'
