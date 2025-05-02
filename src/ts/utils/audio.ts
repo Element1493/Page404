@@ -18,28 +18,28 @@ class Audio{
         this.path       = path;
 
     //Создает элемент плеер:
-        this.content = document.createElement("div");
+        const content = this.content = document.createElement("div");
         this.content.classList.add(`${this.id}-audio`);
         this.content.setAttribute('data-index','0');
         this.content.setAttribute('data-play','false');
         this.element.append(this.content);
 
     //Создает элемент audio:
-        this.audio = document.createElement("audio");
+        const audio = this.audio = document.createElement("audio");
         this.audio.style.display = "none";
         this.audio.src = `${this.path}${Playlist[0].file}`;
         this.audio.controls = true;
         this.content.append(this.audio);
 
     //Создает элемент информационный блок:
-        this.info = document.createElement("div");
+        const info = this.info = document.createElement("div");
         this.info.classList.add(`${this.id}-audio-info`);
         this.info.title = `${Playlist[0].artist} - ${Playlist[0].track}`;
         this.info.textContent = Playlist[0].track;
         this.content.append(this.info);
     
     //Создает элемент контрольной панели:
-        this.controls = document.createElement("div");
+        const controls = this.controls = document.createElement("div");
         this.controls.classList.add(`${this.id}-audio-controls`);
         this.content.append(this.controls);
 
@@ -50,9 +50,7 @@ class Audio{
         const progressbar = this.progressbar;
 
     //Запускает трек:
-        this.track = (index:number = 0) => {
-            const audio = this.audio;
-            const content = this.content;
+        const track = this.track = (index:number = 0) => {
             content.setAttribute('data-index',String(index));
             content.setAttribute('data-play','true');
 
@@ -60,18 +58,18 @@ class Audio{
             audio.currentTime = 0;
             audio.play();
     
-            this.info.setAttribute('title',`${Playlist[index].artist} - ${Playlist[index].track}`);
-            this.info.textContent = Playlist[index].track;
+            info.setAttribute('title',`${Playlist[index].artist} - ${Playlist[index].track}`);
+            info.textContent = Playlist[index].track;
 
             audio.addEventListener('ended', () => {
                 content.setAttribute('data-play','true');
                 if (index < Playlist.length-1) {
                     index++;
                     content.setAttribute('data-index',String(index));
-                    this.track(index);
+                    track(index);
                 }else{
                     content.setAttribute('data-index','0');
-                    this.track(0);
+                    track(0);
                 }
             }, false);
             audio.addEventListener("timeupdate", () => {
@@ -104,7 +102,7 @@ class Audio{
                             tag:'path',
                             attributes:[{
                                 name:'fill',
-                                value:'currentcolor',
+                                value:'currentColor',
                             },{
                                 name:'d',
                                 value:'M5 0 0 3.8l5 3.8V0zm0 3.8 5 3.8V0L5 3.8z'
@@ -120,7 +118,7 @@ class Audio{
                             tag:'path',
                             attributes:[{
                                 name:'fill',
-                                value:'currentcolor',
+                                value:'currentColor',
                             },{
                                 name:'d',
                                 value:'M1.2 0v7.5h2.5V0H1.2zm5 0v7.5h2.5V0H6.2z'
@@ -130,7 +128,7 @@ class Audio{
                             tag:'path',
                             attributes:[{
                                 name:'fill',
-                                value:'currentcolor',
+                                value:'currentColor',
                             },{
                                 name:'d',
                                 value:'M1.2 0v7.5l7.5-3.8L1.2 0z'
@@ -154,7 +152,7 @@ class Audio{
                     }));
                 break;
             }
-            this.controls.append(button);
+            controls.append(button);
         }
 
         this.button('prev');
@@ -162,7 +160,8 @@ class Audio{
         this.button('next');
     }
 //События на переключение предыдущего трека:
-    prev(index: number = Number(this.content.getAttribute('data-index'))){
+    prev(){
+        let index = Number(this.content.getAttribute('data-index'));
         this.content.setAttribute('data-play','true');
         if(index > 0) {
             index--;
@@ -175,34 +174,28 @@ class Audio{
     }
 //Событие на переключение трека:
     toggle(){
-        if(this.audio.paused == false) this.pause(); else this.play();
+        if(this.audio.paused == false){ 
+            this.audio.pause();
+            this.content.setAttribute('data-play','false');
+        }else{ 
+            this.audio.play();
+            this.content.setAttribute('data-play','true');
+        }
     }
 //Событие на запуск трека:
     play(index: number = Number(this.content.getAttribute('data-index'))){
         if(this.audio.paused == true) this.track(index);
     }
 //Событие на остановку трека:
-    pause(index: number = Number(this.content.getAttribute('data-index'))){
+    pause(){
         if(this.audio.paused == false){
-            const timerId = setInterval(()=>{
-                const time = Math.round(this.audio.currentTime);
-                const length = Math.round(this.audio.duration)
-                if (time == length && index < 3) {
-                    index++;
-                    this.content.setAttribute('data-index',String(index));
-                    this.track(index);
-                } else if (time == length && index >= 3) {
-                    this.content.setAttribute('data-index','0');
-                    this.track(0);
-                }
-            }, 10);
             this.audio.pause();
-            clearInterval(timerId);
             this.content.setAttribute('data-play','false');
         }
     }
 //События на переключение следующего трека:
-    next(index: number = Number(this.content.getAttribute('data-index'))){
+    next(){
+        let index = Number(this.content.getAttribute('data-index'));
         this.content.setAttribute('data-play','true');
         if (index < Playlist.length-1) {
             index++;
