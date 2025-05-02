@@ -1,59 +1,59 @@
 var B = Object.defineProperty;
-var N = (t, L, M) => L in t ? B(t, L, { enumerable: !0, configurable: !0, writable: !0, value: M }) : t[L] = M;
-var o = (t, L, M) => N(t, typeof L != "symbol" ? L + "" : L, M);
+var C = (e, L, a) => L in e ? B(e, L, { enumerable: !0, configurable: !0, writable: !0, value: a }) : e[L] = a;
+var d = (e, L, a) => C(e, typeof L != "symbol" ? L + "" : L, a);
 (function() {
   const L = document.createElement("link").relList;
   if (L && L.supports && L.supports("modulepreload"))
     return;
   for (const l of document.querySelectorAll('link[rel="modulepreload"]'))
-    h(l);
+    M(l);
   new MutationObserver((l) => {
-    for (const v of l)
-      if (v.type === "childList")
-        for (const e of v.addedNodes)
-          e.tagName === "LINK" && e.rel === "modulepreload" && h(e);
+    for (const h of l)
+      if (h.type === "childList")
+        for (const s of h.addedNodes)
+          s.tagName === "LINK" && s.rel === "modulepreload" && M(s);
   }).observe(document, { childList: !0, subtree: !0 });
-  function M(l) {
-    const v = {};
-    return l.integrity && (v.integrity = l.integrity), l.referrerPolicy && (v.referrerPolicy = l.referrerPolicy), l.crossOrigin === "use-credentials" ? v.credentials = "include" : l.crossOrigin === "anonymous" ? v.credentials = "omit" : v.credentials = "same-origin", v;
+  function a(l) {
+    const h = {};
+    return l.integrity && (h.integrity = l.integrity), l.referrerPolicy && (h.referrerPolicy = l.referrerPolicy), l.crossOrigin === "use-credentials" ? h.credentials = "include" : l.crossOrigin === "anonymous" ? h.credentials = "omit" : h.credentials = "same-origin", h;
   }
-  function h(l) {
+  function M(l) {
     if (l.ep)
       return;
     l.ep = !0;
-    const v = M(l);
-    fetch(l.href, v);
+    const h = a(l);
+    fetch(l.href, h);
   }
 })();
-const n = {
+const c = {
   xmlns: "http://www.w3.org/2000/svg",
-  create: ({ viewBox: t, tags: L, name: M }) => {
-    const h = document.createElementNS(n.xmlns, "svg");
-    return h.setAttribute("xmlns", n.xmlns), h.setAttribute("viewBox", t), M && h.classList.add(M), L && L.length && L.map(({ name: l, tag: v, attributes: e, stops: r }) => {
-      const u = (c, i, a, d = 0, m = 34) => {
-        d < a.length - 1 ? setTimeout(() => {
-          c.setAttribute(i, a[d]), u(c, i, a, d + 1, m);
-        }, m) : u(c, i, a, 0, m);
-      }, V = document.createElementNS(n.xmlns, v);
-      if (V)
-        switch (h.append(V), l && V.classList.add(l), e && e.length && e.map(({ name: c, value: i, animation: a }) => {
-          typeof a < "u" ? (V.setAttribute(c, i[0]), u(V, c, i, 0, Number(a.time))) : V.setAttribute(c, i);
-        }), v) {
+  create: ({ viewBox: e, tags: L, name: a }) => {
+    const M = document.createElementNS(c.xmlns, "svg");
+    return M.setAttribute("xmlns", c.xmlns), M.setAttribute("viewBox", e), a && M.classList.add(a), L && L.length && L.map(({ name: l, tag: h, attributes: s, stops: o }) => {
+      const r = (t, i, n, u = 0, m = 34) => {
+        u < n.length - 1 ? setTimeout(() => {
+          t.setAttribute(i, n[u]), r(t, i, n, u + 1, m);
+        }, m) : r(t, i, n, 0, m);
+      }, v = document.createElementNS(c.xmlns, h);
+      if (v)
+        switch (M.append(v), l && v.classList.add(l), s && s.length && s.map(({ name: t, value: i, animation: n }) => {
+          typeof n < "u" ? (v.setAttribute(t, i[0]), r(v, t, i, 0, Number(n.time))) : v.setAttribute(t, i);
+        }), h) {
           case "radialGradient":
           case "linearGradient":
-            r && r.length && r.map(({ offset: c, style: i }) => {
-              const a = document.createElementNS(n.xmlns, "stop");
-              a.setAttribute("offset", c), a.setAttribute("style", i), V.append(a);
+            o && o.length && o.map(({ offset: t, style: i }) => {
+              const n = document.createElementNS(c.xmlns, "stop");
+              n.setAttribute("offset", t), n.setAttribute("style", i), v.append(n);
             });
             break;
         }
-    }), h;
+    }), M;
   },
-  svgToDataUri: (t) => {
-    const L = new XMLSerializer().serializeToString(t);
+  svgToDataUri: (e) => {
+    const L = new XMLSerializer().serializeToString(e);
     return `url(data:image/svg+xml;charset=utf-8,${encodeURIComponent(L)})`;
   }
-}, s = [{
+}, V = [{
   track: "Gheaghea Vanea",
   artist: "Graieste Moldovneste",
   file: "graieste_moldovneste_gheaghea_vanea.mp3"
@@ -82,31 +82,38 @@ const n = {
   artist: "Ro-mania",
   file: "dulce-i_vinul_-_ro-maniea.mp3"
 }];
-class C {
-  constructor(L, M = "./music/") {
-    o(this, "id");
-    o(this, "element");
-    o(this, "path");
-    o(this, "content");
-    o(this, "audio");
-    o(this, "info");
-    o(this, "controls");
-    o(this, "track");
-    o(this, "button");
-    o(this, "progressbar");
-    this.id = L.id, this.element = L, this.path = M, this.content = document.createElement("div"), this.content.classList.add(`${this.id}-audio`), this.content.setAttribute("data-index", "0"), this.content.setAttribute("data-play", "false"), this.element.append(this.content), this.audio = document.createElement("audio"), this.audio.style.display = "none", this.audio.src = `${this.path}${s[0].file}`, this.audio.controls = !0, this.content.append(this.audio), this.info = document.createElement("div"), this.info.classList.add(`${this.id}-audio-info`), this.info.title = `${s[0].artist} - ${s[0].track}`, this.info.textContent = s[0].track, this.content.append(this.info), this.controls = document.createElement("div"), this.controls.classList.add(`${this.id}-audio-controls`), this.content.append(this.controls), this.progressbar = document.createElement("div"), this.progressbar.classList.add(`${this.id}-progressbar`), this.element.append(this.progressbar);
-    const h = this.progressbar;
-    this.track = (l = 0) => {
-      const v = this.audio, e = this.content;
-      e.setAttribute("data-index", String(l)), e.setAttribute("data-play", "true"), v.src = `./music/${s[l].file}`, v.currentTime = 0, v.play(), this.info.setAttribute("title", `${s[l].artist} - ${s[l].track}`), this.info.textContent = s[l].track, v.addEventListener("ended", () => {
-        e.setAttribute("data-play", "true"), l < s.length - 1 ? (l++, e.setAttribute("data-index", String(l)), this.track(l)) : (e.setAttribute("data-index", "0"), this.track(0));
-      }, !1), v.addEventListener("timeupdate", () => {
-        h.style.setProperty("--value", (v.currentTime + 0.25) / v.duration * 100 + "%");
+class N {
+  constructor(L, a = "./music/") {
+    d(this, "id");
+    d(this, "element");
+    d(this, "path");
+    d(this, "content");
+    d(this, "audio");
+    d(this, "info");
+    d(this, "controls");
+    d(this, "track");
+    d(this, "button");
+    d(this, "progressbar");
+    this.id = L.id, this.element = L, this.path = a;
+    const M = this.content = document.createElement("div");
+    this.content.classList.add(`${this.id}-audio`), this.content.setAttribute("data-index", "0"), this.content.setAttribute("data-play", "false"), this.element.append(this.content);
+    const l = this.audio = document.createElement("audio");
+    this.audio.style.display = "none", this.audio.src = `${this.path}${V[0].file}`, this.audio.controls = !0, this.content.append(this.audio);
+    const h = this.info = document.createElement("div");
+    this.info.classList.add(`${this.id}-audio-info`), this.info.title = `${V[0].artist} - ${V[0].track}`, this.info.textContent = V[0].track, this.content.append(this.info);
+    const s = this.controls = document.createElement("div");
+    this.controls.classList.add(`${this.id}-audio-controls`), this.content.append(this.controls), this.progressbar = document.createElement("div"), this.progressbar.classList.add(`${this.id}-progressbar`), this.element.append(this.progressbar);
+    const o = this.progressbar, r = this.track = (v = 0) => {
+      M.setAttribute("data-index", String(v)), M.setAttribute("data-play", "true"), l.src = `./music/${V[v].file}`, l.currentTime = 0, l.play(), h.setAttribute("title", `${V[v].artist} - ${V[v].track}`), h.textContent = V[v].track, l.addEventListener("ended", () => {
+        M.setAttribute("data-play", "true"), v < V.length - 1 ? (v++, M.setAttribute("data-index", String(v)), r(v)) : (M.setAttribute("data-index", "0"), r(0));
+      }, !1), l.addEventListener("timeupdate", () => {
+        o.style.setProperty("--value", (l.currentTime + 0.25) / l.duration * 100 + "%");
       });
-    }, this.button = (l) => {
-      const v = document.createElement("button");
-      switch (v.classList.add(`${this.id}-audio-control`, l), v.setAttribute("type", "button"), v.onclick = () => {
-        switch (l) {
+    };
+    this.button = (v) => {
+      const t = document.createElement("button");
+      switch (t.classList.add(`${this.id}-audio-control`, v), t.setAttribute("type", "button"), t.onclick = () => {
+        switch (v) {
           case "prev":
             this.prev();
             break;
@@ -117,15 +124,15 @@ class C {
             this.next();
             break;
         }
-      }, l) {
+      }, v) {
         case "prev":
-          v.append(n.create({
+          t.append(c.create({
             viewBox: "0 0 10 7.5",
             tags: [{
               tag: "path",
               attributes: [{
                 name: "fill",
-                value: "currentcolor"
+                value: "currentColor"
               }, {
                 name: "d",
                 value: "M5 0 0 3.8l5 3.8V0zm0 3.8 5 3.8V0L5 3.8z"
@@ -134,14 +141,14 @@ class C {
           }));
           break;
         case "switch":
-          v.append(n.create({
+          t.append(c.create({
             viewBox: "0 0 10 7.5",
             tags: [{
               name: "pause",
               tag: "path",
               attributes: [{
                 name: "fill",
-                value: "currentcolor"
+                value: "currentColor"
               }, {
                 name: "d",
                 value: "M1.2 0v7.5h2.5V0H1.2zm5 0v7.5h2.5V0H6.2z"
@@ -151,7 +158,7 @@ class C {
               tag: "path",
               attributes: [{
                 name: "fill",
-                value: "currentcolor"
+                value: "currentColor"
               }, {
                 name: "d",
                 value: "M1.2 0v7.5l7.5-3.8L1.2 0z"
@@ -160,7 +167,7 @@ class C {
           }));
           break;
         case "next":
-          v.append(n.create({
+          t.append(c.create({
             viewBox: "0 0 10 7.5",
             tags: [{
               tag: "path",
@@ -175,41 +182,37 @@ class C {
           }));
           break;
       }
-      this.controls.append(v);
+      s.append(t);
     }, this.button("prev"), this.button("switch"), this.button("next");
   }
   //События на переключение предыдущего трека:
-  prev(L = Number(this.content.getAttribute("data-index"))) {
-    this.content.setAttribute("data-play", "true"), L > 0 ? (L--, this.content.setAttribute("data-index", String(L)), this.track(L)) : (this.content.setAttribute("data-index", String(s.length - 1)), this.track(s.length - 1));
+  prev() {
+    let L = Number(this.content.getAttribute("data-index"));
+    this.content.setAttribute("data-play", "true"), L > 0 ? (L--, this.content.setAttribute("data-index", String(L)), this.track(L)) : (this.content.setAttribute("data-index", String(V.length - 1)), this.track(V.length - 1));
   }
   //Событие на переключение трека:
   toggle() {
-    this.audio.paused == !1 ? this.pause() : this.play();
+    this.audio.paused == !1 ? (this.audio.pause(), this.content.setAttribute("data-play", "false")) : (this.audio.play(), this.content.setAttribute("data-play", "true"));
   }
   //Событие на запуск трека:
   play(L = Number(this.content.getAttribute("data-index"))) {
     this.audio.paused == !0 && this.track(L);
   }
   //Событие на остановку трека:
-  pause(L = Number(this.content.getAttribute("data-index"))) {
-    if (this.audio.paused == !1) {
-      const M = setInterval(() => {
-        const h = Math.round(this.audio.currentTime), l = Math.round(this.audio.duration);
-        h == l && L < 3 ? (L++, this.content.setAttribute("data-index", String(L)), this.track(L)) : h == l && L >= 3 && (this.content.setAttribute("data-index", "0"), this.track(0));
-      }, 10);
-      this.audio.pause(), clearInterval(M), this.content.setAttribute("data-play", "false");
-    }
+  pause() {
+    this.audio.paused == !1 && (this.audio.pause(), this.content.setAttribute("data-play", "false"));
   }
   //События на переключение следующего трека:
-  next(L = Number(this.content.getAttribute("data-index"))) {
-    this.content.setAttribute("data-play", "true"), L < s.length - 1 ? (L++, this.content.setAttribute("data-index", String(L)), this.track(L)) : (this.content.setAttribute("data-index", "0"), this.track(0));
+  next() {
+    let L = Number(this.content.getAttribute("data-index"));
+    this.content.setAttribute("data-play", "true"), L < V.length - 1 ? (L++, this.content.setAttribute("data-index", String(L)), this.track(L)) : (this.content.setAttribute("data-index", "0"), this.track(0));
   }
 }
-const y = (t, L = 0, M = 726) => {
-  const h = document.querySelector("body");
-  h && document.body.addEventListener("mousemove", (l) => {
-    const v = Math.floor(l.clientX - h.getBoundingClientRect().left) / (h.getBoundingClientRect().right - h.getBoundingClientRect().left) * h.offsetWidth - (t.offsetLeft + t.offsetWidth / 2);
-    M && window.matchMedia(`(min-width: ${M}px)`) && (t.style.transform = `translate(${-1 * v / L}px)`);
+const y = (e, L = 0, a = 726) => {
+  const M = document.querySelector("body");
+  M && document.body.addEventListener("mousemove", (l) => {
+    const h = Math.floor(l.clientX - M.getBoundingClientRect().left) / (M.getBoundingClientRect().right - M.getBoundingClientRect().left) * M.offsetWidth - (e.offsetLeft + e.offsetWidth / 2);
+    a && window.matchMedia(`(min-width: ${a}px)`) && (e.style.transform = `translate(${-1 * h / L}px)`);
   });
 }, G = {
   viewBox: "0 0 126.7 144.7",
@@ -364,7 +367,7 @@ const y = (t, L = 0, M = 726) => {
       value: ["M36.3,35.6l-6.2-5.2l-3.5,19.7", "M26.7,50l3.2-19.7l6.4,5.3", "M26.9,50l2.9-19.8l6.6,5.3", "M27,50l2.5-19.8l6.8,5.4", "M27.2,50l2.1-19.9l7,5.5", "M27.4,50l1.8-19.9l7.1,5.5", "M27.5,50L29,30.1l7.3,5.5", "M27.7,50l1.1-20l7.5,5.6", "M27.8,50l0.8-20l7.7,5.6", "M28,50l0.4-20.1l7.9,5.7", "M28.2,50V29.8l8.1,5.8", "M28.3,50L28,29.8l8.2,5.8", "M28.5,50l-0.6-20.2l8.5,5.8", "M28.6,50l-1-20.3l8.7,5.9", "M28.8,50l-1.4-20.4l8.9,6", "M28.8,50l-1.4-20.4l8.9,6", "M28.8,50l-1.4-20.4l8.9,6", "M28.8,50l-1.4-20.4l8.9,6", "M28.8,50l-1.4-20.4l8.9,6", "M28.8,50l-1.4-20.4l8.9,6", "M28.8,50l-1.4-20.4l8.9,6", "M28.8,50l-1.4-20.4l8.9,6", "M28.8,50l-1.4-20.4l8.9,6", "M28.8,50l-1.4-20.4l8.9,6", "M28.8,50l-1.4-20.4l8.9,6", "M28.8,50l-1.4-20.4l8.9,6", "M28.8,50l-1.4-20.4l8.9,6", "M28.8,50l-1.4-20.4l8.9,6", "M28.8,50l-1.4-20.4l8.9,6", "M28.8,50l-1.4-20.4l8.9,6", "M28.8,50l-1.4-20.4l8.9,6", "M28.8,50l-1.4-20.4l8.9,6", "M28.8,50l-1.4-20.4l8.9,6", "M28.8,50l-1.4-20.4l8.9,6", "M28.8,50l-1.4-20.4l8.9,6", "M28.8,50l-1.4-20.4l8.9,6", "M28.7,50l-1.2-20.4l8.8,6", "M28.6,50l-0.9-20.4l8.6,6", "M28.5,50l-0.6-20.3l8.5,5.9", "M28.3,50L28,29.8l8.3,5.8", "M28.2,50l-0.1-20.2l8.2,5.8", "M28.1,50l0.2-20.2l8,5.8", "M28,50l0.5-20.2l7.9,5.8", "M27.8,50l0.8-20.1l7.7,5.7", "M27.7,50l1-20l7.6,5.6", "M27.6,50l1.3-20l7.4,5.6", "M27.5,50L29,30.1l7.2,5.5", "M27.3,50l1.9-19.9l7.1,5.5", "M27.2,50l2.1-19.9l7,5.5", "M27.1,50l2.4-19.9l6.8,5.5", "M27,50l2.6-19.8l6.7,5.4", "M26.8,50l3-19.8l6.5,5.3", "M26.7,50l3.2-19.7l6.4,5.3", "M26.6,50l3.5-19.7l6.2,5.2", "M26.6,50l3.5-19.7l6.2,5.2", "M26.6,50l3.5-19.7l6.2,5.2", "M26.6,50l3.5-19.7l6.2,5.2", "M26.6,50l3.5-19.7l6.2,5.2", "M26.6,50l3.5-19.7l6.2,5.2", "M26.6,50l3.5-19.7l6.2,5.2", "M26.6,50l3.5-19.7l6.2,5.2", "M26.6,50l3.5-19.7l6.2,5.2", "M26.6,50l3.5-19.7l6.2,5.2", "M26.6,50l3.5-19.7l6.2,5.2", "M26.6,50l3.5-19.7l6.2,5.2", "M26.6,50l3.5-19.7l6.2,5.2", "M26.6,50l3.5-19.7l6.2,5.2", "M26.6,50l3.5-19.7l6.2,5.2", "M26.6,50l3.5-19.7l6.2,5.2", "M26.6,50l3.5-19.7l6.2,5.2", "M26.6,50l3.5-19.7l6.2,5.2", "M26.6,50l3.5-19.7l6.2,5.2", "M26.6,50l3.5-19.7l6.2,5.2", "M26.6,50l3.5-19.7l6.2,5.2", "M26.6,50l3.5-19.7l6.2,5.2", "M26.6,50l3.5-19.7l6.2,5.2", "M26.6,50l3.5-19.7l6.2,5.2", "M26.6,50l3.5-19.7l6.2,5.2", "M26.6,50l3.5-19.7l6.2,5.2", "M26.6,50l3.5-19.7l6.2,5.2", "M26.6,50l3.5-19.7l6.2,5.2", "M26.6,50l3.5-19.7l6.2,5.2", "M26.6,50l3.5-19.7l6.2,5.2", "M26.6,50l3.5-19.7l6.2,5.2", "M26.6,50l3.5-19.7l6.2,5.2", "M26.6,50l3.5-19.7l6.2,5.2", "M26.6,50l3.5-19.7l6.2,5.2", "M26.6,50l3.5-19.7l6.2,5.2", "M26.6,50l3.5-19.7l6.2,5.2", "M26.6,50l3.5-19.7l6.2,5.2", "M26.6,50l3.5-19.7l6.2,5.2", "M26.6,50l3.5-19.7l6.2,5.2", "M26.4,50.3L30,30.6l6.4,5", "M26.2,50.5l3.6-19.8l6.5,4.8", "M25.9,50.8L29.6,31l6.7,4.6", "M25.7,51l3.7-19.9l6.9,4.5", "M25.5,51.3l3.8-19.9l7,4.2", "M25.3,51.5l3.8-20l7.2,4", "M25,51.8l3.9-20l7.4,3.8", "M24.8,52l4-20l7.5,3.6", "M24.6,52.3l4-20l7.7,3.4", "M24.4,52.5l4.1-20.1l7.9,3.2", "M24.2,52.8l4.1-20.2l8,3", "M23.9,53l4.2-20.2l8.2,2.8", "M23.7,53.3l4.2-20.2l8.4,2.6", "M23.5,53.5l4.3-20.3l8.5,2.4", "M23.3,53.8l4.3-20.4l8.7,2.2", "M23,54.1l4.4-20.4l8.9,2", "M23,54.1l4.4-20.4l8.9,2", "M23,54.1l4.4-20.4l8.9,2", "M23,54.1l4.4-20.4l8.9,2", "M23,54.1l4.4-20.4l8.9,2", "M23,54.1l4.4-20.4l8.9,2", "M23,54.1l4.4-20.4l8.9,2", "M23,54.1l4.4-20.4l8.9,2", "M23,54.1l4.4-20.4l8.9,2", "M23,54.1l4.4-20.4l8.9,2", "M23,54.1l4.4-20.4l8.9,2", "M23,54.1l4.4-20.3l8.8,1.9", "M23,54.1l4.5-20.3l8.7,1.8", "M23,54.1l4.6-20.2l8.6,1.8", "M23,54.1l4.7-20.2l8.6,1.8", "M23,54.1l4.8-20.2l8.5,1.7", "M23,54.1L27.9,34l8.4,1.6", "M23,54.1l4.9-20l8.3,1.6", "M23,54.1l5-20l8.2,1.5", "M23,54.1l5.1-19.9l8.1,1.5", "M23,54.1l5.2-19.8l8.1,1.4", "M23,54.1l5.3-19.8l8,1.3", "M23,54.1l5.4-19.8l7.9,1.3", "M23,54.1l5.4-19.7l7.8,1.2", "M23,54.1l5.5-19.7l7.7,1.2", "M23,54.1l5.6-19.6l7.6,1.1", "M23,54.1l5.7-19.5l7.6,1", "M23,54.1l5.8-19.5l7.5,1", "M23,54.1l5.9-19.4l7.4,1", "M23,54.1l6-19.4l7.3,0.9", "M23,54.1l6-19.3l7.2,0.8", "M23,54.1l6.1-19.2l7.1,0.8", "M23,54.1l6.2-19.2l7.1,0.8", "M23,54.1l6.3-19.2l7,0.7", "M23,54.1l6.4-19l6.9,0.6", "M23,54.1l6.4-19l6.8,0.5", "M23,54.1l6.5-19l6.7,0.5", "M23,54.1l6.6-18.9l6.6,0.5", "M23,54.1l6.7-18.8l6.6,0.4", "M23,54.1l6.8-18.8l6.5,0.3", "M23,54.1l6.9-18.8l6.4,0.3", "M23,54.1l7-18.7l6.2,0.2", "M23,54.1l6.9-18.7l6.4,0.2", "M23,54.1l6.8-18.8l6.5,0.3", "M23,54.1l6.6-18.9l6.7,0.5", "M23,54.1l6.4-19l6.8,0.5", "M23,54.1L29.3,35l7,0.6", "M23,54.1l6.1-19.2l7.1,0.8", "M23,54.1l6-19.3l7.2,0.8", "M23,54.1l5.8-19.4l7.4,1", "M23,54.1l5.7-19.5l7.6,1", "M23,54.1l5.6-19.6l7.7,1.1", "M23,54.1l5.4-19.7l7.8,1.2", "M23,54.1l5.3-19.8l8,1.3", "M23,54.1l5.1-19.9l8.1,1.5", "M23,54.1l5-20l8.2,1.5", "M23,54.1L27.8,34l8.4,1.6", "M23,54.1l4.7-20.2l8.6,1.8", "M23,54.1l4.5-20.3l8.7,1.8", "M23,54.1l4.4-20.4l8.9,2", "M23,54.1l4.4-20.4l8.9,2", "M23,54.1l4.4-20.4l8.9,2", "M23,54.1l4.4-20.4l8.9,2", "M23,54.1l4.4-20.4l8.9,2", "M23,54.1l4.4-20.4l8.9,2", "M23,54.1l4.4-20.4l8.9,2", "M23,54.1l4.4-20.4l8.9,2", "M23,54.1l4.4-20.4l8.9,2", "M23,54.1l4.4-20.4l8.9,2", "M23,54.1l4.4-20.4l8.9,2", "M23,54.1l4.4-20.4l8.9,2", "M23,54.1l4.4-20.4l8.9,2", "M23,54.1l4.4-20.4l8.9,2", "M23,54.1l4.4-20.4l8.9,2", "M23,54.1l4.4-20.4l8.9,2", "M23,54.1l4.4-20.4l8.9,2", "M23,54.1l4.4-20.4l8.9,2", "M23,54.1l4.4-20.4l8.9,2", "M23,54.1l4.4-20.4l8.9,2", "M23,54.1l4.4-20.4l8.9,2", "M23,54.1l4.4-20.4l8.9,2", "M23,54.1l4.4-20.4l8.9,2", "M23,54.1l4.4-20.4l8.9,2", "M23,54.1l4.4-20.4l8.9,2", "M23,54.1l4.4-20.4l8.9,2", "M23,54.1l4.4-20.4l8.9,2", "M23,54.1l4.4-20.4l8.9,2", "M23,54.1l4.4-20.4l8.9,2", "M23,54.1l4.4-20.4l8.9,2", "M23,54.1l4.4-20.4l8.9,2", "M23,54.1l4.4-20.4l8.9,2", "M23,54.1l4.4-20.4l8.9,2", "M23,54.1l4.4-20.4l8.9,2", "M23,54.1l4.4-20.4l8.9,2", "M23,54.1l4.4-20.4l8.9,2", "M23,54.1l4.4-20.4l8.9,2", "M23,54.1l4.4-20.4l8.9,2", "M23,54.1l4.4-20.4l8.9,2", "M23,54.1l4.4-20.4l8.9,2", "M23,54.1l4.4-20.4l8.9,2", "M23,54.1l4.4-20.4l8.9,2", "M23,54.1l4.4-20.4l8.9,2", "M23,54.1l4.4-20.4l8.9,2", "M23,54.1l4.4-20.4l8.9,2", "M23,54.1l4.4-20.4l8.9,2", "M23,54.1l4.4-20.4l8.9,2", "M23,54.1l4.4-20.4l8.9,2", "M23,54.1l4.4-20.4l8.9,2", "M23,54.1l4.4-20.4l8.9,2", "M23,54.1l4.4-20.4l8.9,2", "M23,54.1l4.4-20.4l8.9,2", "M23,54.1l4.4-20.4l8.9,2", "M23,54.1l4.4-20.4l8.9,2", "M23,54.1l4.4-20.4l8.9,2", "M23,54.1l4.4-20.4l8.9,2", "M23,54.1l4.4-20.4l8.9,2", "M23,54.1l4.4-20.4l8.9,2", "M23,54.1l4.4-20.4l8.9,2", "M23,54.1l4.4-20.4l8.9,2", "M23,54.1l4.4-20.4l8.9,2", "M23,54.1l4.4-20.4l8.9,2", "M23.2,53.9l4.4-20.3l8.8,2.1", "M23.4,53.7l4.3-20.3l8.6,2.2", "M23.5,53.5l4.2-20.2l8.5,2.4", "M23.7,53.3l4.2-20.2l8.4,2.6", "M23.9,53.1l4.2-20.2l8.2,2.8", "M24.1,52.9l4.1-20.1l8.1,2.9", "M24.2,52.7l4.1-20.1l8,3.1", "M24.4,52.5l4-20.1l7.8,3.2", "M24.6,52.3l4-20l7.7,3.4", "M24.8,52.1l3.9-20l7.6,3.6", "M25,51.9l3.9-20l7.4,3.8", "M25.1,51.7l3.9-20l7.3,3.9", "M25.3,51.5l3.8-19.9l7.2,4", "M25.5,51.3l3.8-19.9l7,4.2", "M25.7,51.1l3.7-19.8l6.9,4.4", "M25.8,50.9l3.7-19.8l6.8,4.5", "M26,50.7l3.6-19.8l6.6,4.8", "M26.2,50.5l3.6-19.8l6.5,4.9", "M26.4,50.3L30,30.6l6.4,5"]
     }]
   }]
-}, I = {
+}, O = {
   viewBox: "0 0 175.7 144.7",
   tags: [{
     tag: "linearGradient",
@@ -434,7 +437,7 @@ const y = (t, L = 0, M = 726) => {
       value: "M95.2 14.6c-.2-1.2-.5-2.2-.8-3l-.7-.9-1.2.7L90 14 11.5 115.5c-1.2 1.7-2.1 3.2-2.4 4.5.4.7 1.6 1.2 3.5 1.4l98.1 11.1c2.1.3 3.5 0 4.1-.9.3-1.1.3-2.6 0-4.5L95.2 14.6m.1-10.1c1.2.1 2.3.8 3.1 2.2.9 1.3 1.5 3.1 1.9 5.3l19.8 112.4c.5 2.9.4 5.4-.2 7.6-.3 1.4-.9 2.5-1.6 3.4-1 1.3-2.3 2.2-3.9 2.8s-3.4.7-5.3.5L11 127.6c-2-.2-3.6-.7-4.8-1.6-1.2-1-2-2.1-2.2-3.5-.2-.9-.2-2.1.2-3.5.6-2.3 1.9-4.7 3.9-7.2L86.5 10.4c3.4-4.2 6.3-6.2 8.8-5.9m15.6 123.7-1.3.2-28.2-3.1c-.5 0-.9-.1-1-.4l.4-.8 4.4-3.4c1.3-.8 2.5-2 3.6-3.4-.8-1.2-1.5-2.6-2.2-4.1l5-1.9-12.8-34.5c-.2-.5.1-1.1.6-1.3.5-.2 1.1.1 1.3.6l12.8 34.4 5-1.9c.1.4.3.7.4 1.1.9-.6 1.6-1.2 2.2-1.9 1.4-1.7 3.4-2.8 5.9-3.2l3.9 22.4v1.2z"
     }]
   }]
-}, A = 34, O = {
+}, A = 34, I = {
   viewBox: "0 0 134.4 121",
   tags: [{
     tag: "radialGradient",
@@ -558,15 +561,15 @@ const y = (t, L = 0, M = 726) => {
       value: "M83.7 170.3c-1.9-2-5.4-4-10.6-5.9-2.2.7-4.4 1.5-6.6 2.2l-56.4-21.9c-1-.4-2.2.1-2.6 1.1s.1 2.2 1.1 2.6l51.9 20.2c-2.2.7-4.4 1.5-6.6 2.2 5.3 1.9 10.6 3.3 16.1 4 5.6.8 9.8.8 12.5-.1 2.6-.9 3-2.4 1.2-4.4zM78.6 14.6 59 127.1c-.3 1.9-.3 3.4 0 4.5.6.9 2 1.2 4.1.9l98.1-11.1c1.9-.2 3.1-.7 3.5-1.4-.3-1.3-1.2-2.8-2.4-4.5L83.8 14l-2.5-2.6-1.2-.7-.7.9c-.3.8-.6 1.8-.8 3m-.1-10.1c2.5-.3 5.4 1.7 8.8 5.9l78.4 101.4c2 2.5 3.3 4.9 3.9 7.2.4 1.4.4 2.6.2 3.5-.2 1.4-1 2.5-2.2 3.5-1.2.9-2.8 1.4-4.8 1.6l-98.1 11.1c-1.9.2-3.7.1-5.3-.5s-2.9-1.5-3.9-2.8c-.7-.9-1.3-2-1.6-3.4-.6-2.2-.7-4.7-.2-7.6L73.5 12c.4-2.2 1-4 1.9-5.3.8-1.4 1.9-2.1 3.1-2.2m79.2 113.2c-.1.3-.4.5-1.1.6l-31.9 3.6-1.3-.2c-.1-.3-.1-.6-.1-1 1.1-2.6 1.9-4.2 2.5-5.1.8-1.2 1.3-2.8 1.5-4.8.1-2.1.2-3.7.3-4.6.2-.9 1.2-2.3 3.1-4.1 1.8-1.8 2.9-3.5 3.1-5.2.3-2.4 1.7-4.1 4.2-5.2l19 24.6.7 1.4"
     }]
   }]
-}, U = ({ id: t, title: L, description: M, postscript: h }) => {
-  const l = document.getElementById(t);
+}, U = ({ id: e, title: L, description: a, postscript: M }) => {
+  const l = document.getElementById(e);
   if (l) {
-    const v = new C(l), e = n.svgToDataUri(n.create(G)), r = document.createElement("div");
-    r.classList.add(`${l.id}-center`), l.append(r);
-    const u = document.createElement("div");
-    u.classList.add(`${l.id}-background-1`), u.style.backgroundImage = e, y(u, 5), r.append(u);
-    const V = document.createElement("div");
-    V.classList.add(`${l.id}-cities`), r.append(V), [{
+    const h = new N(l), s = c.svgToDataUri(c.create(G)), o = document.createElement("div");
+    o.classList.add(`${l.id}-center`), l.append(o);
+    const r = document.createElement("div");
+    r.classList.add(`${l.id}-background-1`), r.style.backgroundImage = s, y(r, 5), o.append(r);
+    const v = document.createElement("div");
+    v.classList.add(`${l.id}-cities`), o.append(v), [{
       viewBox: "0 0 1420 460",
       fill: "#c5d2dd",
       path: "M1419 381V114.5l-30.3-16.7V51.2h-81.8V1h-105.2v127.2h-24.5v29.7h-19.1v71.2h-22.3v-98h-55.3v-28.6h-31.3v45.8l-29.2 16v92.2h-69.1V54.1h-74.4V92H818l-15.9 8.7v21h-73.3l-13.8 7.6v71.2h-30.9V90.8h-57.3v19.3h-90.9v46.3l-16.5 9.1V211H492V98.6l-37.2-8.1V60.1h-99.9v128.4H339V25.7l-21.3.6L255 43.8v159.8h-26.5V98l-16-21v-8.1h-37.2V77h-20.1l-16 18.7h-14.9V17.6H86.1v28.2H31.3L0 63l.4 318.9z",
@@ -583,7 +586,7 @@ const y = (t, L = 0, M = 726) => {
       decay: 200
     }].map(({ viewBox: H, fill: $, path: _, decay: z }, F) => {
       const b = document.createElement("div");
-      b.classList.add(`${l.id}-city-${F + 1}`), b.style.backgroundImage = n.svgToDataUri(n.create({
+      b.classList.add(`${l.id}-city-${F + 1}`), b.style.backgroundImage = c.svgToDataUri(c.create({
         viewBox: H,
         tags: [{
           tag: "path",
@@ -595,43 +598,43 @@ const y = (t, L = 0, M = 726) => {
             value: _
           }]
         }]
-      })), y(b, z), V.append(b);
+      })), y(b, z), v.append(b);
     });
-    const c = document.createElement("div");
-    c.classList.add(`${l.id}-container`), r.append(c);
+    const t = document.createElement("div");
+    t.classList.add(`${l.id}-container`), o.append(t);
     const i = document.createElement("div");
-    i.classList.add(`${l.id}-top`), c.append(i);
-    const a = document.createElement("div");
-    a.classList.add(`${l.id}-roadSign-1`), a.style.backgroundImage = e, y(a, 150), i.append(a);
-    const d = document.createElement("div");
-    d.classList.add(`${l.id}-roadSign-2`), d.append(n.create(T)), y(d, 50), i.append(d);
+    i.classList.add(`${l.id}-top`), t.append(i);
+    const n = document.createElement("div");
+    n.classList.add(`${l.id}-roadSign-1`), n.style.backgroundImage = s, y(n, 150), i.append(n);
+    const u = document.createElement("div");
+    u.classList.add(`${l.id}-roadSign-2`), u.append(c.create(T)), y(u, 50), i.append(u);
     const m = document.createElement("div");
-    m.classList.add(`${l.id}-background-2`), m.append(n.create(I)), d.append(m);
+    m.classList.add(`${l.id}-background-2`), m.append(c.create(O)), u.append(m);
     const g = document.createElement("div");
-    g.classList.add(`${l.id}-roadSign-3`), g.append(n.create(O)), i.append(g);
-    const k = document.createElement("div");
-    k.classList.add(`${l.id}-background-3`), k.append(n.create(P)), g.append(k);
+    g.classList.add(`${l.id}-roadSign-3`), g.append(c.create(I)), i.append(g);
+    const x = document.createElement("div");
+    x.classList.add(`${l.id}-background-3`), x.append(c.create(P)), g.append(x);
     const p = document.createElement("div");
-    p.classList.add(`${l.id}-bottom`), c.append(p);
+    p.classList.add(`${l.id}-bottom`), t.append(p);
     const S = document.createElement("h1");
     S.innerHTML = L, p.append(S);
+    const k = document.createElement("div");
+    k.classList.add(`${l.id}-description`), k.innerHTML = a.replace(new RegExp("\\[play]?(.*?)\\[/play]", "g"), '<span class="link" data-audio="play">$1</span>'), p.append(k);
     const w = document.createElement("div");
-    w.classList.add(`${l.id}-description`), w.innerHTML = M.replace(new RegExp("\\[play]?(.*?)\\[/play]", "g"), '<span class="link" data-audio="play">$1</span>'), p.append(w);
-    const x = document.createElement("div");
-    x.classList.add(`${l.id}-postscript`), x.innerHTML = h, p.append(x);
+    w.classList.add(`${l.id}-postscript`), w.innerHTML = M, p.append(w);
     const f = document.querySelectorAll("[data-audio]");
     if (f.length)
       for (let H = 0; H < f.length; H++)
         f[H].addEventListener("click", () => {
           switch (f[H].getAttribute("data-audio")) {
             case "toggle":
-              v.toggle();
+              h.toggle();
               break;
             case "play":
-              v.play();
+              h.play();
               break;
             case "pause":
-              v.pause();
+              h.pause();
               break;
           }
         });
