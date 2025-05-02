@@ -8,7 +8,7 @@
     "name": "Sergey Zverev",
     "email": "element1493@yandex.ru"
   },
-  "license": "MIT",
+  "license": "CC-BY-NC-ND",
   "type": "module",
   "browserslist": [
     "defaults"
