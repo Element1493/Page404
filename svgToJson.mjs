@@ -31,7 +31,7 @@ const svgToJson = ({to,form}) =>{
             return result;
         }), null, 2);
         fs.writeFileSync(form,svg,'utf-8');
-        console.error(`Конвертация завершена`);
+        console.log(`Конвертация завершена`);
     }else{
         console.error(`Файл ${to} - отсутствует`);
     }

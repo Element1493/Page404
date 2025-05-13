@@ -72,6 +72,7 @@ class Audio{
                     track(0);
                 }
             }, false);
+            
             audio.addEventListener("timeupdate", () => {
                 progressbar.style.setProperty("--value", (audio.currentTime +.25)/audio.duration*100+'%');
             });
@@ -181,6 +182,9 @@ class Audio{
             this.audio.play();
             this.content.setAttribute('data-play','true');
         }
+        this.audio.addEventListener("timeupdate", () => {
+            this.progressbar.style.setProperty("--value", (this.audio.currentTime +.25)/this.audio.duration*100+'%');
+        });
     }
 //Событие на запуск трека:
     play(index: number = Number(this.content.getAttribute('data-index'))){
